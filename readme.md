@@ -51,3 +51,4 @@ This is just a rough plan for now.
   - Home page
   - User page
   - Twot page? Or should this just be a pop-up?
+  - Search page?
