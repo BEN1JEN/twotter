@@ -1,0 +1,4 @@
+/server/target
+/data
+!/data/.gitkeep
+*.bak~
