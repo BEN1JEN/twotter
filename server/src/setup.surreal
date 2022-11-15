@@ -1,0 +1,37 @@
+DEFINE TABLE info SCHEMAFULL;
+DEFINE FIELD valid ON TABLE info TYPE bool ASSERT $value == true;
+DEFINE FIELD version ON TABLE info TYPE int ASSERT $value == 1;
+
+CREATE info:info SET valid = true, version = 1;
+
+DEFINE TABLE user SCHEMAFULL;
+DEFINE FIELD tag ON TABLE user TYPE string ASSERT $value != null;
+DEFINE INDEX tag ON TABLE user COLUMNS tag UNIQUE;
+DEFINE FIELD auth ON TABLE user TYPE object ASSERT $value != null;
+DEFINE FIELD auth.pass_salt ON TABLE user TYPE string ASSERT $value != null;
+DEFINE FIELD auth.pass_hash ON TABLE user TYPE string ASSERT $value != null;
+DEFINE FIELD details ON TABLE user TYPE object ASSERT $value != null;
+DEFINE FIELD details.name ON TABLE user TYPE string ASSERT $value != null;
+DEFINE FIELD details.pronouns ON TABLE user TYPE string ASSERT $value != null;
+DEFINE FIELD details.bio ON TABLE user TYPE string ASSERT $value != null;
+DEFINE FIELD details.icon ON TABLE user TYPE record(asset) ASSERT $value != null;
+DEFINE FIELD privilege ON TABLE user TYPE string ASSERT $value != null;
+
+DEFINE TABLE follows SCHEMAFULL;
+DEFINE FIELD user ON TABLE follows TYPE record(user) ASSERT $value != null AND $value.id != null;
+DEFINE INDEX user ON TABLE follows COLUMNS user;
+DEFINE FIELD following ON TABLE follows TYPE record(user) ASSERT $value != null AND $value.id != null;
+DEFINE INDEX following ON TABLE follows COLUMNS following;
+
+DEFINE TABLE asset SCHEMAFULL;
+DEFINE FIELD hash ON TABLE asset TYPE string ASSERT $value != null string::length($value) == 64;
+DEFINE INDEX hash ON TABLE asset COLUMNS hash UNIQUE;
+DEFINE FIELD name ON TABLE asset TYPE string ASSERT $value != null;
+
+DEFINE TABLE post SCHEMAFULL;
+DEFINE FIELD content ON post TYPE string ASSERT $value != null;
+DEFINE FIELD poster ON post TYPE record(user) ASSERT $value != null AND $value.id != null;
+DEFINE FIELD media ON post TYPE array ASSERT $value != null;
+DEFINE FIELD media.* ON post TYPE record(asset) ASSERT $value != null;
+DEFINE FIELD repost ON post TYPE record(post) ASSERT repost == null OR reply == null;
+DEFINE FIELD reply ON post TYPE record(post) ASSERT repost == null OR reply == null;
