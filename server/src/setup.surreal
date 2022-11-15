@@ -24,7 +24,7 @@ DEFINE FIELD following ON TABLE follows TYPE record(user) ASSERT $value != null 
 DEFINE INDEX following ON TABLE follows COLUMNS following;
 
 DEFINE TABLE asset SCHEMAFULL;
-DEFINE FIELD hash ON TABLE asset TYPE string ASSERT $value != null string::length($value) == 64;
+DEFINE FIELD hash ON TABLE asset TYPE string ASSERT $value != null AND string::length($value) == 64;
 DEFINE INDEX hash ON TABLE asset COLUMNS hash UNIQUE;
 DEFINE FIELD name ON TABLE asset TYPE string ASSERT $value != null;
 

@@ -1,0 +1,30 @@
+#V2
+SELECT * from *
+select * from info
+info for bg
+info for dg
+info for db
+USE NS MAIN
+USE DB MAIN
+INFO FOR DB
+INFO FOR NS
+INFO FOR KV
+DEFINE TABLE info SCHEMAFULL
+DEFINE FIELD valid ON info TYPE bool ASSERT $value == true
+DEFINE FIELD version ON info TYPE int ASSERT $value == 1
+CREATE info:info SET valid = true, version = 1
+SELECT * FROM info
+info for db
+info for ns
+info for db
+use db uwu
+create pizza
+select * from pizza
+info for ns
+info for db
+define ns uwu
+use ns uwu
+create pie
+info for ns
+info for kv
+info for db
